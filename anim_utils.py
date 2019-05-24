@@ -5,7 +5,6 @@ import pandas as pd
 from settings import *
 
 
-
 def connect(strIP='127.0.0.1', nPort=9559):
 
     session = qi.Session()
