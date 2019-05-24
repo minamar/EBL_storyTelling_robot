@@ -7,22 +7,20 @@ import re
 from anim_utils import *
 from story_dicts import *
 from sent_dict import *
-# from pynput.keyboard import Key, Listener
 import argparse
 
-
 """
-Load a df of postures and display on the robot
-
+Load a df of postures and display on the robot, person='child' or 'adult'
 """
 
-def story_tell():
-    parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('person', type=str, default='child', help='child or adult?')
 
-
-    args = parser.parse_args()
-    person = args.person
+def story_tell(person='child'):
+    # parser = argparse.ArgumentParser(description='Process some integers.')
+    # parser.add_argument('person', type=str, default='child', help='child or adult?')
+    #
+    #
+    # args = parser.parse_args()
+    # person = args.person
     script_dir = os.path.dirname(__file__)
 
     strIP = '10.0.206.62'
@@ -34,24 +32,9 @@ def story_tell():
     # Resting state
     init_rest(leds_ses, alife_ses, posture_ses)
 
-    memory_ses = session.service("ALMemory")
     # Start text to speech
     tts_ses = session.service("ALTextToSpeech")
     tts_ses.setParameter('speed', 85)
-
-    # def on_press(key):
-    #     print('{0} pressed'.format(
-    #         key))
-    #
-    # def on_release(key):
-    #     pass
-    #
-    # # Collect events until released
-    # with Listener(
-    #         on_press=on_press,
-    #         on_release=on_release) as listener:
-    #     listener.join()
-
 
     if person == 'child':
         # Directory with sampled anims for the fairy tale
@@ -82,10 +65,11 @@ def story_tell():
 
                     # LEDs
                     for l in range(16):
-                        leds_fut = leds_ses.fadeRGB(leds_short[l], rgb_chunks[l][0], rgb_chunks[l][1], rgb_chunks[l][2], 0, _async=True)
+                        leds_ses.fadeRGB(leds_short[l], rgb_chunks[l][0], rgb_chunks[l][1], rgb_chunks[l][2], 0,
+                                         _async=True)
 
                     # Motion
-                    motion_fut = motion_ses.setAngles(joints_names, angle_list, 0.05)
+                    motion_ses.setAngles(joints_names, angle_list, 0.05)
 
             print('Duration: ' + str(time.time() - start))
             motion_ses.setAngles(joints_names, standInit, 0.05, _async=True)
@@ -124,11 +108,11 @@ def story_tell():
 
                     # LEDs
                     for l in range(16):
-                        leds_fut = leds_ses.fadeRGB(leds_short[l], rgb_chunks[l][0], rgb_chunks[l][1], rgb_chunks[l][2], 0,
-                                                    _async=True)
+                        leds_ses.fadeRGB(leds_short[l], rgb_chunks[l][0], rgb_chunks[l][1], rgb_chunks[l][2], 0,
+                                         _async=True)
 
                     # Motion
-                    motion_fut = motion_ses.setAngles(joints_names, angle_list, 0.05)
+                    motion_ses.setAngles(joints_names, angle_list, 0.05)
                 else:
                     break
 

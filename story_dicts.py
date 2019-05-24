@@ -1,38 +1,17 @@
-import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
-from sent_dict import sent
-from anim_utils import *
 
-# # Get valences per sentence from EVAL scripts and normalize
-# rates = pd.read_csv('/home/mina/Dropbox/APRIL-MINA/EXP3_Generation/storyTelling/Eval/Eval/Anders_Cebron_Grimm.txt', sep=' ', header=None)
-# and_v = rates.iloc[0:38, :]
-# v_keys = and_v.iloc[:, 0]
-# v_val = and_v.iloc[:, 1:]
-#
-# v_val = v_val.convert_objects(convert_numeric=True)
-#
-# scaler = MinMaxScaler(feature_range=(0., 1.))
-# scaler = scaler.fit(v_val)
-# normalized = scaler.transform(v_val)
-#
-# v_mean =np.nanmean(normalized, axis=1)
-#
-# sent_vnan = {}
-# for i in range(38):
-#     sent_vnan[v_keys[i]] = round(v_mean[i], 2)
-
-# Sentece valence
+# Sentece valence for fairytale
 sent_v = {'a20': 0.94, 'a21': 0.38, 'a22': 0.22, 'a23': 0.78, 'a24': 0.85, 'a25': 0.16, 'a26': 0.58, 'a27': 0.88,
           'a28': 0.23, 'a29': 0.71, 'a31': 0.86, 'a30': 0.53, 'a37': 0.15, 'a36': 0.25, 'a33': 0.76, 'a35': 0.87,
           'a34': 0.8, 'a32': 0.62, 'a15': 0.65, 'a14': 0.07, 'a17': 0.82, 'a16': 0.62, 'a11': 0.65, 'a10': 0.56,
           'a13': 0.07, 'a12': 0.47, 'a38': 0.64, 'a19': 0.91, 'a18': 0.83, 'a1': 0.26, 'a3': 0.16, 'a2': 0.03,
           'a5': 0.03, 'a4': 0.22, 'a7': 0.18, 'a6': 0.44, 'a9': 0.08, 'a8': 0.11}
 
+# Keys for fairytale sentences
 sent_keys = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16',
              'a17', 'a18', 'a19', 'a20', 'a21', 'a22', 'a23', 'a24', 'a25', 'a26', 'a27', 'a28', 'a29', 'a30', 'a31',
              'a32', 'a33', 'a34', 'a35', 'a36', 'a37', 'a38']
 
+# Fairytale animations
 sent_anim = {'a1': 'l1_168_dec_long0_r4_Neg.csv', 'a2': 'l3_138_dec_long6_r3_Neg.csv',
              'a3': 'l3_171_dec_long1_r4_Neg.csv', 'a4': 'l1_120_dec_long0_r3_Neg.csv',
              'a5': 'l3_132_dec_long4_r3_Neg.csv', 'a6': 'l2_127_dec_long2_r3_Neu.csv',
@@ -53,8 +32,7 @@ sent_anim = {'a1': 'l1_168_dec_long0_r4_Neg.csv', 'a2': 'l3_138_dec_long6_r3_Neg
              'a35': 'l3_230_dec_long4_r5_Pos.csv', 'a36': 'l2_180_dec_long4_r4_Neg.csv',
              'a37': 'l3_189_dec_long7_r4_Neg.csv', 'a38': 'l2_172_dec_long1_r4_Neu.csv'}
 
-
-# Speech duration of each sentence
+# Speech duration of each fairy tale sentence
 sent_dur = {'a20': 3.870327949523926, 'a21': 7.092369079589844, 'a22': 7.196001052856445, 'a23': 8.889841079711914,
             'a24': 24.38889193534851, 'a25': 5.624668121337891, 'a26': 1.701089859008789, 'a27': 19.688267946243286,
             'a28': 4.542748928070068, 'a29': 8.832337856292725, 'a31': 9.671294927597046, 'a30': 13.543401956558228,
@@ -66,29 +44,3 @@ sent_dur = {'a20': 3.870327949523926, 'a21': 7.092369079589844, 'a22': 7.1960010
             'a5': 5.281320810317993, 'a4': 6.7420220375061035, 'a7': 3.63273286819458, 'a6': 7.312089920043945,
             'a9': 6.458831787109375, 'a8': 3.002556085586548}
 
-# # Measure spoken sentence duration
-# strIP = '10.0.206.62'
-# nPort = 9559
-# # Connect to robot (for virtual only give port, for real only give IP string)
-# session = connect(strIP, nPort)
-# # Load naoqi modules
-# motion_ses, aplayer_ses, posture_ses, leds_ses, alife_ses = load_modules(session)
-# # Resting state
-# init_rest(leds_ses, alife_ses, posture_ses)
-#
-# tts_ses = session.service("ALTextToSpeech")
-# tts_ses.setParameter('speed', 85)
-#
-# for k in ['a39']:
-#     phrase = sent[k]
-#     # raw_input("Press Enter to continue...")
-#     print(k)
-#     print(phrase)
-#     print('........')
-#     start = time.time()
-#     tts_ses.say(phrase)
-#     end = time.time() - start
-#     sent_dur[k] = end
-#     print(" Duration: ", str(end))
-#
-# k = None
